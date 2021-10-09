@@ -6,7 +6,7 @@ import './index.css';
 
 ReactDOM.render(
   <StrictMode>
-    <ColorModeScript />
+    <ColorModeScript initialColorMode={'dark'} />
     <App />
   </StrictMode>,
   document.getElementById('root')
