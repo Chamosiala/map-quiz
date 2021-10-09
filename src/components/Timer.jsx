@@ -2,7 +2,7 @@ import { Text } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 
 const Timer = ({ timerOn = false, loseGame, onTimePause }) => {
-  const maxTime = 48000;
+  const maxTime = 480000;
   const [time, setTime] = useState(maxTime);
 
   useEffect(() => {
@@ -22,7 +22,6 @@ const Timer = ({ timerOn = false, loseGame, onTimePause }) => {
     } else {
       clearInterval(interval);
       onTimePause(time);
-      // setTime(maxTime);
     }
 
     return () => {
