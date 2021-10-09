@@ -1,7 +1,7 @@
 path:hover {
-  fill: aliceblue;
+  cursor: pointer;
 }
 
 .mapBorder:hover {
-  fill: none;
+  cursor: default;
 }
