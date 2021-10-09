@@ -1,0 +1,28 @@
+const localitatiFillDictionary = {
+  Slatina: 'white',
+  Caracal: 'white',
+  Balș: 'white',
+  Corabia: 'white',
+  Scornicești: 'white',
+  'Drăgănești-olt': 'white',
+  'Piatra-olt': 'white',
+  Potcoava: 'white',
+  'Osica-de-Sus': 'white',
+  Izbiceni: 'white',
+  Fărcaşele: 'white',
+  Curtișoara: 'white',
+  Brastavățu: 'white',
+  Rusănești: 'white',
+  'Tia Mare': 'white',
+  'Iancu Jianu': 'white',
+  Mărunței: 'white',
+  Găneasa: 'white',
+  Fălcoiu: 'white',
+  'Valea Mare': 'white',
+  Ianca: 'white',
+  Dobrosloveni: 'white',
+  Crâmpoia: 'white',
+  Dăneasa: 'white',
+};
+
+export default localitatiFillDictionary;
