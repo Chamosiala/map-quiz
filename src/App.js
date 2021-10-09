@@ -1,20 +1,13 @@
-import {
-  Box,
-  Button,
-  ChakraProvider,
-  Flex,
-  theme,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Button, ChakraProvider, Flex, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
-import AnswerPercentage from './components/AnswerPercentage';
 import Counter from './components/Counter';
 import Map from './components/Map';
 import Question from './components/Question';
 import Timer from './components/Timer';
 import LOCALITATI_OLT from './constants/LOCALITATI_OLT';
 import localitatiFillDictionary from './localitatiFillDictionary';
+import theme from './theme';
 
 function App() {
   const [localitatiFill, setLocalitatiFill] = useState(
@@ -137,7 +130,6 @@ function App() {
                 handleChange={validateQuestion}
                 timerOn={timerOn}
               />
-              {/* <AnswerPercentage /> */}
               <Text fontSize="large" p={5} backgroundColor="teal" mb="auto">
                 {Math.floor((100 * correctAnswers) / LOCALITATI_OLT.length)}%
               </Text>
