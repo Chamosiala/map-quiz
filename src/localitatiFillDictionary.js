@@ -79,6 +79,13 @@ const localitatiFillDictionary = {
   Vlădila: 'white',
   Voineasa: 'white',
   'Vișina Nouă': 'white',
+  Drăghiceni: 'white',
+  Seaca: 'white',
+  Spineni: 'white',
+  Perieți: 'white',
+  'Ștefan Cel Mare': 'white',
+  // 'Călui': 'white',
+  Dobroteasa: 'white',
 };
 
 export default localitatiFillDictionary;
