@@ -1,8 +1,7 @@
 import { Text } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 
-const Timer = ({ timerOn = false, loseGame, onTimePause }) => {
-  const maxTime = 480000;
+const Timer = ({ maxTime, timerOn = false, loseGame, onTimePause }) => {
   const [time, setTime] = useState(maxTime);
 
   useEffect(() => {
@@ -28,6 +27,7 @@ const Timer = ({ timerOn = false, loseGame, onTimePause }) => {
       clearInterval(interval);
       clearTimeout(timeout);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timerOn]);
 
   return (

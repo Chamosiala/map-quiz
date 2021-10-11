@@ -10,6 +10,8 @@ import localitatiFillDictionary from './localitatiFillDictionary';
 import theme from './theme';
 
 function App() {
+  const maxTime = 480000;
+
   const [localitatiFill, setLocalitatiFill] = useState(
     localitatiFillDictionary
   );
@@ -77,7 +79,7 @@ function App() {
   };
 
   const recordTime = time => {
-    setTime(time);
+    setTime(maxTime - time);
   };
 
   useEffect(() => {
@@ -102,6 +104,7 @@ function App() {
 
     setLocalitatiFill(copyLocalitatiFill);
     console.log(localitatiFill);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answer]);
 
   useEffect(() => {
@@ -135,6 +138,7 @@ function App() {
               </Text>
             </Flex>
             <Timer
+              maxTime={maxTime}
               timerOn={timerOn}
               loseGame={loseGame}
               onTimePause={recordTime}
@@ -148,7 +152,10 @@ function App() {
             </Flex>
             {gameIsWon ? (
               <Text mt="100px" mx="100px">
-                Ai castigat!
+                Ai castigat! Timpul tau:{' '}
+                {('0' + Math.floor((time / 60000) % 60)).slice(-2)}:
+                {('0' + Math.floor((time / 1000) % 60)).slice(-2)}.
+                {('0' + ((time / 10) % 100)).slice(-2)}
               </Text>
             ) : null}
             {gameIsLost ? (
