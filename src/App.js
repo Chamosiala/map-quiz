@@ -2,8 +2,10 @@ import { Box, Button, ChakraProvider, Flex, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import Counter from './components/Counter';
+import LevelSelect from './components/LevelSelect';
 import Map from './components/Map';
 import Question from './components/Question';
+import StartStopButtons from './components/StartStopButtons';
 import Timer from './components/Timer';
 import LOCALITATI_OLT from './constants/LOCALITATI_OLT';
 import localitatiFillDictionary from './localitatiFillDictionary';
@@ -25,6 +27,7 @@ function App() {
   const [wrongAnswers, setWrongAnswers] = useState(0);
   const [gameIsLost, setGameIsLost] = useState(false);
   const [gameIsWon, setGameIsWon] = useState(false);
+  const [level, setLevel] = useState('0');
 
   const resetGame = () => {
     resetPaths();
@@ -134,7 +137,10 @@ function App() {
                 timerOn={timerOn}
               />
               <Text fontSize="large" p={5} backgroundColor="teal" mb="auto">
-                {Math.floor((100 * correctAnswers) / LOCALITATI_OLT.length)}%
+                {Math.floor(
+                  (100 * correctAnswers) / (remainingAnswers + correctAnswers)
+                )}
+                %
               </Text>
             </Flex>
             <Timer
@@ -163,31 +169,16 @@ function App() {
                 Ai pierdut!
               </Text>
             ) : null}
-            {timerOn ? (
-              <Button
-                backgroundColor="red"
-                mt="150px"
-                mx="100px"
-                onClick={() => {
-                  setTimerOn(false);
-                  resetGame();
-                }}
-              >
-                Quit
-              </Button>
-            ) : (
-              <Button
-                backgroundColor="green"
-                mt="150px"
-                mx="100px"
-                onClick={() => {
-                  setTimerOn(true);
-                  resetGame();
-                }}
-              >
-                {gameIsLost || gameIsWon ? 'Play Again' : 'Play'}
-              </Button>
-            )}
+
+            {timerOn ? null : <LevelSelect setLevel={setLevel} />}
+            <StartStopButtons
+              timerOn={timerOn}
+              setTimerOn={setTimerOn}
+              resetGame={resetGame}
+              gameIsLost={gameIsLost}
+              gameIsWon={gameIsWon}
+              level={level}
+            />
           </Box>
         </Flex>
       </Box>

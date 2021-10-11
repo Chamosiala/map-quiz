@@ -1,11 +1,40 @@
-import { Heading } from '@chakra-ui/layout';
+import { Button } from '@chakra-ui/button';
 
-const Question = () => {
-  return (
-    <Heading p={5} textColor="black" backgroundColor="tan" mb="auto">
-      Localitate
-    </Heading>
+const StartStopButtons = ({
+  timerOn,
+  setTimerOn,
+  resetGame,
+  gameIsLost,
+  gameIsWon,
+  level,
+}) => {
+  return timerOn ? (
+    <Button
+      backgroundColor="red"
+      mt="150px"
+      mx="100px"
+      onClick={() => {
+        setTimerOn(false);
+        resetGame();
+      }}
+    >
+      Quit
+    </Button>
+  ) : (
+    <Button
+      backgroundColor="green"
+      mt="150px"
+      mx="100px"
+      onClick={() => {
+        if (level != '0') {
+          setTimerOn(true);
+          resetGame();
+        }
+      }}
+    >
+      {gameIsLost || gameIsWon ? 'Play Again' : 'Play'}
+    </Button>
   );
 };
 
-export default Question;
+export default StartStopButtons;
