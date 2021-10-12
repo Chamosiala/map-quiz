@@ -2,6 +2,10 @@ path:hover {
   cursor: pointer;
 }
 
+path:not([class]) {
+  fill: gray;
+}
+
 .mapBorder:hover {
   cursor: default;
 }
