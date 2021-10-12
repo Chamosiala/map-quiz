@@ -1,4 +1,18 @@
-import { Box, Button, ChakraProvider, Flex, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  ChakraProvider,
+  Flex,
+  Text,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverHeader,
+  PopoverBody,
+  Tooltip,
+} from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import Counter from './components/Counter';
@@ -154,12 +168,14 @@ function App() {
       </Flex>
       <Box mt={8} mx="auto" maxW="800px" w="100%">
         <Flex>
-          <Map
-            alignItems="center"
-            pointerEvents="none"
-            handleClick={validateAnswer}
-            localitatiFill={localitatiFill}
-          />
+          <Tooltip label="hello">
+            <Map
+              alignItems="center"
+              pointerEvents="none"
+              handleClick={validateAnswer}
+              localitatiFill={localitatiFill}
+            />
+          </Tooltip>
           <Box>
             <Flex mb={5}>
               <Question
