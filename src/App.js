@@ -1,18 +1,4 @@
-import {
-  Box,
-  Button,
-  ChakraProvider,
-  Flex,
-  Text,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverHeader,
-  PopoverBody,
-  Tooltip,
-} from '@chakra-ui/react';
+import { Box, ChakraProvider, Flex, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import Counter from './components/Counter';
