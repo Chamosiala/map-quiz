@@ -122,7 +122,7 @@ function App() {
   }, [answer]);
 
   useEffect(() => {
-    if (level === '0') {
+    if (level === '0' || gameIsWon || gameIsLost) {
       return;
     }
 
