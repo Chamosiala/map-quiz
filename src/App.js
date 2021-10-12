@@ -170,7 +170,7 @@ function App() {
                 handleChange={validateQuestion}
                 timerOn={timerOn}
               />
-              <Text fontSize="large" p={5} backgroundColor="teal" mb="auto">
+              <Text fontSize="large" p={5} backgroundColor="green" mb="auto">
                 {Math.floor(
                   (100 * correctAnswers) / (remainingAnswers + correctAnswers)
                 )}
