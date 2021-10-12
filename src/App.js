@@ -111,6 +111,18 @@ function App() {
   }, [answer]);
 
   useEffect(() => {
+    if (level === '0') {
+      return;
+    } else {
+      setLocalitati(LOCALITATI_OLT.slice(0, 8 * parseInt(level)));
+    }
+  }, [timerOn]);
+
+  useEffect(() => {
+    setRemainingAnswers(localitati.length);
+  }, [localitati]);
+
+  useEffect(() => {
     if (remainingAnswers === 0) {
       winGame();
     }
