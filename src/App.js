@@ -168,14 +168,12 @@ function App() {
       </Flex>
       <Box mt={8} mx="auto" maxW="800px" w="100%">
         <Flex>
-          <Tooltip label="hello">
-            <Map
-              alignItems="center"
-              pointerEvents="none"
-              handleClick={validateAnswer}
-              localitatiFill={localitatiFill}
-            />
-          </Tooltip>
+          <Map
+            alignItems="center"
+            pointerEvents="none"
+            handleClick={validateAnswer}
+            localitatiFill={localitatiFill}
+          />
           <Box>
             <Flex mb={5}>
               <Question
