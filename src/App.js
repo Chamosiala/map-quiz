@@ -61,6 +61,17 @@ function App() {
     }
   };
 
+  const disablePaths = (localitati, localitatiFill) => {
+    for (const localitate in localitatiFill) {
+      if (
+        !localitati.includes(localitate) &&
+        localitatiFill[localitate] === 'white'
+      ) {
+        localitatiFill[localitate] = 'gray';
+      }
+    }
+  };
+
   const validateAnswer = localitate => {
     if (localitatiFill[localitate] === 'white' && timerOn) {
       setAnswer(localitate);
@@ -113,9 +124,17 @@ function App() {
   useEffect(() => {
     if (level === '0') {
       return;
-    } else {
-      setLocalitati(LOCALITATI_OLT.slice(0, 8 * parseInt(level)));
     }
+
+    setLocalitati(LOCALITATI_OLT.slice(0, 8 * parseInt(level)));
+
+    let copyLocalitatiFill = localitatiFill;
+    disablePaths(
+      LOCALITATI_OLT.slice(0, 8 * parseInt(level)),
+      copyLocalitatiFill
+    );
+
+    setLocalitatiFill(copyLocalitatiFill);
   }, [timerOn]);
 
   useEffect(() => {
