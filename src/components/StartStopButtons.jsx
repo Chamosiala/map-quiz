@@ -26,7 +26,7 @@ const StartStopButtons = ({
       mt="150px"
       mx="100px"
       onClick={() => {
-        if (level != '0') {
+        if (level !== '0' && level !== '') {
           setTimerOn(true);
           resetGame();
         }

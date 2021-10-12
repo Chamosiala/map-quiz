@@ -122,7 +122,7 @@ function App() {
   }, [answer]);
 
   useEffect(() => {
-    if (level === '0' || gameIsWon || gameIsLost) {
+    if (level === '0' || level === '' || gameIsWon || gameIsLost) {
       return;
     }
 
@@ -135,6 +135,7 @@ function App() {
     );
 
     setLocalitatiFill(copyLocalitatiFill);
+    console.log(level);
   }, [timerOn]);
 
   useEffect(() => {
