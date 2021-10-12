@@ -168,12 +168,14 @@ function App() {
       </Flex>
       <Box mt={8} mx="auto" maxW="800px" w="100%">
         <Flex>
-          <Map
-            alignItems="center"
-            pointerEvents="none"
-            handleClick={validateAnswer}
-            localitatiFill={localitatiFill}
-          />
+          <Box>
+            <Map
+              alignItems="center"
+              pointerEvents="none"
+              handleClick={validateAnswer}
+              localitatiFill={localitatiFill}
+            />
+          </Box>
           <Box>
             <Flex mb={5}>
               <Question

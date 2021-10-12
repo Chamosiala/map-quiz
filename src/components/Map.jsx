@@ -1,4 +1,3 @@
-import { Tooltip } from '@chakra-ui/react';
 import Localitate from './Localitate';
 
 const Map = ({ handleClick, localitatiFill }) => {
