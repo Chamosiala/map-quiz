@@ -17,6 +17,10 @@ const LevelSelect = ({ setLevel }) => {
       <option value="8">Nivelul 8</option>
       <option value="9">Nivelul 9</option>
       <option value="10">Nivelul 10</option>
+      <option value="11">Nivelul 11</option>
+      <option value="12">Nivelul 12</option>
+      <option value="13">Nivelul 13</option>
+      <option value="14">Nivelul 14</option>
     </Select>
   );
 };
