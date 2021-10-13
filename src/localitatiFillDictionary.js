@@ -110,7 +110,7 @@ const localitatiFillDictionary = {
   'Optași-măgura': 'white',
   Tătulești: 'white',
   Topana: 'white',
-  // 'Baldovinești': 'white',
+  Baldovinești: 'white',
 };
 
 export default localitatiFillDictionary;
