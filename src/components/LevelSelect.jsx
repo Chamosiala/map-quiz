@@ -6,7 +6,7 @@ const LevelSelect = ({ setLevel }) => {
   };
 
   return (
-    <Select onChange={change} placeholder="Alege nivelul">
+    <Select mt="10" onChange={change} placeholder="Alege nivelul">
       <option value="1">Nivelul 1</option>
       <option value="2">Nivelul 2</option>
       <option value="3">Nivelul 3</option>

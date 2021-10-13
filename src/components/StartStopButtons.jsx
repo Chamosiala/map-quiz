@@ -10,9 +10,8 @@ const StartStopButtons = ({
 }) => {
   return timerOn ? (
     <Button
+      mx="auto"
       backgroundColor="red"
-      mt="150px"
-      mx="100px"
       onClick={() => {
         setTimerOn(false);
         resetGame();
@@ -22,9 +21,8 @@ const StartStopButtons = ({
     </Button>
   ) : (
     <Button
+      mx="auto"
       backgroundColor="green"
-      mt="150px"
-      mx="100px"
       onClick={() => {
         if (level !== '0' && level !== '') {
           setTimerOn(true);
@@ -32,7 +30,7 @@ const StartStopButtons = ({
         }
       }}
     >
-      {gameIsLost || gameIsWon ? 'Play Again' : 'Play'}
+      {gameIsLost || gameIsWon ? 'Acelasi Nivel' : 'Play'}
     </Button>
   );
 };

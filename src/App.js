@@ -1,4 +1,4 @@
-import { Box, ChakraProvider, Flex, Text } from '@chakra-ui/react';
+import { Box, ChakraProvider, Flex, Text, Button } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import Counter from './components/Counter';
@@ -163,7 +163,7 @@ function App() {
               localitatiFill={localitatiFill}
             />
           </Box>
-          <Box>
+          <Box alignContent="center">
             <Flex mb={5}>
               <Question
                 localitati={localitati}
@@ -191,7 +191,7 @@ function App() {
               />
             </Flex>
             {gameIsWon ? (
-              <Text mt="100px" mx="100px">
+              <Text mt="100px" mx="100px" mb="5px">
                 Ai castigat! Timpul tau:{' '}
                 {('0' + Math.floor((time / 60000) % 60)).slice(-2)}:
                 {('0' + Math.floor((time / 1000) % 60)).slice(-2)}.
@@ -199,20 +199,35 @@ function App() {
               </Text>
             ) : null}
             {gameIsLost ? (
-              <Text mt="100px" mx="100px">
+              <Text mt="100px" mx="100px" mb="5px">
                 Ai pierdut!
               </Text>
             ) : null}
 
             {timerOn ? null : <LevelSelect setLevel={setLevel} />}
-            <StartStopButtons
-              timerOn={timerOn}
-              setTimerOn={setTimerOn}
-              resetGame={resetGame}
-              gameIsLost={gameIsLost}
-              gameIsWon={gameIsWon}
-              level={level}
-            />
+            <Flex className="gameButtons" mt="10">
+              <StartStopButtons
+                timerOn={timerOn}
+                setTimerOn={setTimerOn}
+                resetGame={resetGame}
+                gameIsLost={gameIsLost}
+                gameIsWon={gameIsWon}
+                level={level}
+              />
+              {gameIsWon && level !== '14' ? (
+                <Button
+                  backgroundColor="green"
+                  onClick={() => {
+                    setLevel(prevLevel => (parseInt(prevLevel) + 1).toString());
+                    setTimerOn(true);
+                    resetGame();
+                    console.log('current level: ', level);
+                  }}
+                >
+                  Nivelul Urmator
+                </Button>
+              ) : null}
+            </Flex>
           </Box>
         </Flex>
       </Box>
