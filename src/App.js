@@ -117,7 +117,6 @@ function App() {
     }
 
     setLocalitatiFill(copyLocalitatiFill);
-    console.log(localitatiFill);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answer]);
 
@@ -135,7 +134,6 @@ function App() {
     );
 
     setLocalitatiFill(copyLocalitatiFill);
-    console.log(level);
   }, [timerOn]);
 
   useEffect(() => {
@@ -192,7 +190,7 @@ function App() {
             </Flex>
             {gameIsWon ? (
               <Text mt="100px" mx="100px" mb="5px">
-                Ai castigat! Timpul tau:{' '}
+                Ai terminat nivelul {level}! Timpul tau:{' '}
                 {('0' + Math.floor((time / 60000) % 60)).slice(-2)}:
                 {('0' + Math.floor((time / 1000) % 60)).slice(-2)}.
                 {('0' + ((time / 10) % 100)).slice(-2)}
@@ -221,7 +219,6 @@ function App() {
                     setLevel(prevLevel => (parseInt(prevLevel) + 1).toString());
                     setTimerOn(true);
                     resetGame();
-                    console.log('current level: ', level);
                   }}
                 >
                   Nivelul Urmator
