@@ -6,6 +6,7 @@ const Localitate = ({
   onClick,
   transform,
   d,
+  stroke,
   strokeWidth,
 }) => {
   return fill === 'red' ? (
@@ -16,6 +17,7 @@ const Localitate = ({
         onClick={onClick}
         transform={transform}
         d={d}
+        stroke={stroke}
         stroke-width={strokeWidth}
       />
     </Tooltip>
@@ -26,6 +28,7 @@ const Localitate = ({
       onClick={onClick}
       transform={transform}
       d={d}
+      stroke={stroke}
       stroke-width={strokeWidth}
     />
   );
