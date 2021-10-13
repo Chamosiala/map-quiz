@@ -98,7 +98,7 @@ const localitatiFillDictionary = {
   Bărăști: 'white',
   Șopârlița: 'white',
   Ipotești: 'white',
-  // 'Vădastra': 'white',
+  Vădastra: 'white',
   Leleasca: 'white',
   Oboga: 'white',
   Dobrun: 'white',

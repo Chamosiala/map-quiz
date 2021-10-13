@@ -110,7 +110,7 @@ const LOCALITATI_OLT = [
   'Optași-măgura',
   'Tătulești',
   'Topana',
-  // 'Baldovinești',
+  'Baldovinești',
 ];
 
 export default LOCALITATI_OLT;
