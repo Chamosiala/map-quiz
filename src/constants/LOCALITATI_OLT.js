@@ -98,7 +98,7 @@ const LOCALITATI_OLT = [
   'Bărăști',
   'Șopârlița',
   'Ipotești',
-  // 'Vădastra',
+  'Vădastra',
   'Leleasca',
   'Oboga',
   'Dobrun',
