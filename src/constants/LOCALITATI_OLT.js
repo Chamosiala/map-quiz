@@ -93,7 +93,7 @@ const LOCALITATI_OLT = [
   'Grădinile',
   'Milcov',
   'Priseaca',
-  'Mihaești',
+  'Mihăești',
   'Osica De Jos',
   'Bărăști',
   'Șopârlița',

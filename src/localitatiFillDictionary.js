@@ -93,7 +93,7 @@ const localitatiFillDictionary = {
   Grădinile: 'white',
   Milcov: 'white',
   Priseaca: 'white',
-  Mihaești: 'white',
+  Mihăești: 'white',
   'Osica De Jos': 'white',
   Bărăști: 'white',
   Șopârlița: 'white',
