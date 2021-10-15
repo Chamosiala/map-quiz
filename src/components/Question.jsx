@@ -1,4 +1,4 @@
-import { Heading } from '@chakra-ui/layout';
+import { Heading, Box } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
 
 const Question = ({ localitati, handleChange, timerOn }) => {
@@ -10,15 +10,19 @@ const Question = ({ localitati, handleChange, timerOn }) => {
   }, [localitati, timerOn]);
 
   return (
-    <Heading
-      p={5}
-      textColor="black"
-      backgroundColor="tan"
-      mb="auto"
-      onChange={handleChange(localitate)}
-    >
-      {timerOn ? localitate : 'Olt'}
-    </Heading>
+    <Box w="300px">
+      <Heading
+        textAlign="center"
+        h="85px"
+        lineHeight="85px"
+        textColor="black"
+        backgroundColor="tan"
+        mb="auto"
+        onChange={handleChange(localitate)}
+      >
+        {timerOn ? localitate : 'Olt'}
+      </Heading>
+    </Box>
   );
 };
 

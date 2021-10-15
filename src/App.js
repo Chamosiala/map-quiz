@@ -168,12 +168,20 @@ function App() {
                 handleChange={validateQuestion}
                 timerOn={timerOn}
               />
-              <Text fontSize="large" p={5} backgroundColor="green" mb="auto">
-                {Math.floor(
-                  (100 * correctAnswers) / (remainingAnswers + correctAnswers)
-                )}
-                %
-              </Text>
+              <Box w="75px" backgroundColor="green">
+                <Text
+                  align="center"
+                  h="85px"
+                  fontSize="large"
+                  margin="auto"
+                  lineHeight="85px"
+                >
+                  {Math.floor(
+                    (100 * correctAnswers) / (remainingAnswers + correctAnswers)
+                  )}
+                  %
+                </Text>
+              </Box>
             </Flex>
             <Timer
               maxTime={maxTime}
