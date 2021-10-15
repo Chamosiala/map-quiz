@@ -68,7 +68,7 @@ const LOCALITATI_OLT = [
   'Giuvărăști',
   'Vitomirești',
   'Cungrea',
-  'Găvanești',
+  'Găvănești',
   'Poboru',
   'Sârbii - Măgura',
   'Urzica',

@@ -68,7 +68,7 @@ const localitatiFillDictionary = {
   Giuvărăști: 'white',
   Vitomirești: 'white',
   Cungrea: 'white',
-  Găvanești: 'white',
+  Găvănești: 'white',
   Poboru: 'white',
   'Sârbii - Măgura': 'white',
   Urzica: 'white',
