@@ -30,7 +30,7 @@ const StartStopButtons = ({
         }
       }}
     >
-      {gameIsLost || gameIsWon ? 'Acelasi Nivel' : 'Play'}
+      {gameIsLost || gameIsWon ? 'Play Again' : 'Play'}
     </Button>
   );
 };
