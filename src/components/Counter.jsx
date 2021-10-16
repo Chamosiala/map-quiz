@@ -2,7 +2,7 @@ import { Box, Flex, Text } from '@chakra-ui/layout';
 
 const Counter = ({ remainingAnswers, correctAnswers, wrongAnswers }) => {
   return (
-    <Flex mt="auto" mx="auto" p=".1875rem" fontSize=".9em" lineHeight={1.1}>
+    <Flex mt="40px" mx="auto" p=".1875rem" fontSize=".9em" lineHeight={1.1}>
       <Box background="gray" p="1.4%">
         <Text>Remaining</Text>
         <Text fontSize="large">{remainingAnswers}</Text>

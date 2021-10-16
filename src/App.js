@@ -1,7 +1,10 @@
 import { Box, ChakraProvider, Flex, Text, Button } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
+import CompletionPercentage from './components/CompletionPercentage';
 import Counter from './components/Counter';
+import GameButtons from './components/GameButtons';
+import GameResult from './components/GameResult';
 import LevelSelect from './components/LevelSelect';
 import Map from './components/Map';
 import Question from './components/Question';
@@ -151,91 +154,58 @@ function App() {
       <Flex ml="auto">
         <ColorModeSwitcher ml="auto" />
       </Flex>
-      <Box mt={8} mx="auto" maxW="800px" w="100%">
-        <Flex>
-          <Box>
-            <Map
-              alignItems="center"
-              pointerEvents="none"
-              handleClick={validateAnswer}
-              localitatiFill={localitatiFill}
-            />
-          </Box>
-          <Box alignContent="center">
-            <Flex mb={5}>
-              <Question
-                localitati={localitati}
-                handleChange={validateQuestion}
-                timerOn={timerOn}
-              />
-              <Box w="75px" backgroundColor="green">
-                <Text
-                  align="center"
-                  h="85px"
-                  fontSize="large"
-                  margin="auto"
-                  lineHeight="85px"
-                >
-                  {Math.floor(
-                    (100 * correctAnswers) / (remainingAnswers + correctAnswers)
-                  )}
-                  %
-                </Text>
-              </Box>
-            </Flex>
-            <Timer
-              maxTime={maxTime}
+      <Flex className="gameContainer" mt={8} mx="auto" maxW="800px" w="100%">
+        <Box>
+          <Map
+            alignItems="center"
+            pointerEvents="none"
+            handleClick={validateAnswer}
+            localitatiFill={localitatiFill}
+          />
+        </Box>
+        <Box className="gameInterface" alignContent="center">
+          <Flex mb={5}>
+            <Question
+              localitati={localitati}
+              handleChange={validateQuestion}
               timerOn={timerOn}
-              loseGame={loseGame}
-              onTimePause={recordTime}
             />
-            <Flex mt="40px">
-              <Counter
-                remainingAnswers={remainingAnswers}
-                correctAnswers={correctAnswers}
-                wrongAnswers={wrongAnswers}
-              />
-            </Flex>
-            {gameIsWon ? (
-              <Text mt="100px" mx="100px" mb="5px">
-                Ai terminat nivelul {level}! Timpul tau:{' '}
-                {('0' + Math.floor((time / 60000) % 60)).slice(-2)}:
-                {('0' + Math.floor((time / 1000) % 60)).slice(-2)}.
-                {('0' + ((time / 10) % 100)).slice(-2)}
-              </Text>
-            ) : null}
-            {gameIsLost ? (
-              <Text mt="100px" mx="100px" mb="5px">
-                Ai pierdut!
-              </Text>
-            ) : null}
-
-            {timerOn ? null : <LevelSelect setLevel={setLevel} />}
-            <Flex className="gameButtons" mt="10">
-              <StartStopButtons
-                timerOn={timerOn}
-                setTimerOn={setTimerOn}
-                resetGame={resetGame}
-                gameIsLost={gameIsLost}
-                gameIsWon={gameIsWon}
-                level={level}
-              />
-              {gameIsWon && level !== '14' ? (
-                <Button
-                  backgroundColor="green"
-                  onClick={() => {
-                    setLevel(prevLevel => (parseInt(prevLevel) + 1).toString());
-                    setTimerOn(true);
-                    resetGame();
-                  }}
-                >
-                  Nivelul Urmator
-                </Button>
-              ) : null}
-            </Flex>
-          </Box>
-        </Flex>
-      </Box>
+            <CompletionPercentage
+              correctAnswers={correctAnswers}
+              remainingAnswers={remainingAnswers}
+            />
+          </Flex>
+          <Timer
+            maxTime={maxTime}
+            timerOn={timerOn}
+            loseGame={loseGame}
+            onTimePause={recordTime}
+          />
+          <Flex>
+            <Counter
+              remainingAnswers={remainingAnswers}
+              correctAnswers={correctAnswers}
+              wrongAnswers={wrongAnswers}
+            />
+          </Flex>
+          {gameIsWon ? (
+            <GameResult result={'won'} time={time} level={level} />
+          ) : null}
+          {gameIsLost ? (
+            <GameResult result={'lost'} time={time} level={level} />
+          ) : null}
+          {timerOn ? null : <LevelSelect setLevel={setLevel} />}
+          <GameButtons
+            gameIsLost={gameIsLost}
+            gameIsWon={gameIsWon}
+            level={level}
+            resetGame={resetGame}
+            setTimerOn={setTimerOn}
+            timerOn={timerOn}
+            setLevel={setLevel}
+          />
+        </Box>
+      </Flex>
     </ChakraProvider>
   );
 }
