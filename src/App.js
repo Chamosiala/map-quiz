@@ -30,7 +30,6 @@ function App() {
   const localitatiState = useSelector(state => state.localitati);
   const localitati = localitatiState.localitati;
   const timer = useSelector(state => state.timer);
-  // const [question, setQuestion] = useState('');
   const question = useSelector(state => state.question);
   const [answer, setAnswer] = useState('');
   const [remainingAnswers, setRemainingAnswers] = useState(localitati.length);
@@ -91,10 +90,6 @@ function App() {
       setAnswer(localitate);
     }
   };
-
-  // const validateQuestion = localitate => {
-  //   setQuestion(localitate);
-  // };
 
   const winGame = () => {
     dispatch(setTimerOn(false));
