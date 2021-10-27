@@ -179,7 +179,7 @@ function App() {
               remainingAnswers={remainingAnswers}
             />
           </Flex>
-          <Timer maxTime={maxTime} timerOn={timer.isOn} loseGame={loseGame} />
+          <Timer maxTime={maxTime} loseGame={loseGame} />
           <Flex>
             <Counter
               remainingAnswers={remainingAnswers}
