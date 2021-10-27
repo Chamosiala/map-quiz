@@ -17,7 +17,7 @@ const StartStopButtons = ({
         resetGame();
       }}
     >
-      Quit
+      Stop
     </Button>
   ) : (
     <Button
