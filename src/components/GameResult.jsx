@@ -1,6 +1,9 @@
 import { Text } from '@chakra-ui/layout';
+import { useSelector } from 'react-redux';
 
-const GameResult = ({ result, level, time }) => {
+const GameResult = ({ result, level }) => {
+  const time = useSelector(state => state.timer.spentTime);
+
   if (result === 'won') {
     return (
       <Text mt="100px" mx="100px" mb="5px">

@@ -1,26 +1,29 @@
 import { Text } from '@chakra-ui/layout';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { decreaseTime, resetTimer, setTime } from '../redux/timer/actions';
 
-const Timer = ({ maxTime, timerOn = false, loseGame, onTimePause }) => {
-  const [time, setTime] = useState(maxTime);
+const Timer = ({ maxTime, loseGame }) => {
+  const timer = useSelector(state => state.timer);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let interval = null;
     let timeout = null;
 
-    if (timerOn) {
-      setTime(maxTime);
+    if (timer.isOn) {
+      dispatch(resetTimer());
       interval = setInterval(() => {
-        setTime(prevTime => prevTime - 10);
+        dispatch(decreaseTime(10));
       }, 10);
       timeout = setTimeout(() => {
         clearInterval(interval);
-        setTime(0);
+        dispatch(setTime(0));
         loseGame();
       }, maxTime);
     } else {
       clearInterval(interval);
-      onTimePause(time);
     }
 
     return () => {
@@ -28,13 +31,13 @@ const Timer = ({ maxTime, timerOn = false, loseGame, onTimePause }) => {
       clearTimeout(timeout);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [timerOn]);
+  }, [timer.isOn]);
 
   return (
     <Text my="auto" fontSize="x-large" align="center">
-      {('0' + Math.floor((time / 60000) % 60)).slice(-2)}:
-      {('0' + Math.floor((time / 1000) % 60)).slice(-2)}.
-      {('0' + ((time / 10) % 100)).slice(-2)}
+      {('0' + Math.floor((timer.remainingTime / 60000) % 60)).slice(-2)}:
+      {('0' + Math.floor((timer.remainingTime / 1000) % 60)).slice(-2)}.
+      {('0' + ((timer.remainingTime / 10) % 100)).slice(-2)}
     </Text>
   );
 };

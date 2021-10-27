@@ -1,13 +1,24 @@
 import { Heading, Box } from '@chakra-ui/layout';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { setQuestion } from '../redux/question/actions';
 
-const Question = ({ localitati, handleChange, timerOn }) => {
-  const randomIndex = Math.floor(Math.random() * localitati.length);
-  const [localitate, setLocalitate] = useState(localitati[randomIndex]);
+const Question = () => {
+  const localitatiState = useSelector(state => state.localitati);
+  const localitati = localitatiState.localitati;
+  const timer = useSelector(state => state.timer);
+  // const [localitate, setLocalitate] = useState(localitati[randomIndex]);
+  const question = useSelector(state => state.question);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setLocalitate(localitati[randomIndex]);
-  }, [localitati, timerOn]);
+    if (localitatiState.isFiltered) {
+      dispatch(
+        setQuestion(localitati[Math.floor(Math.random() * localitati.length)])
+      );
+    }
+  }, [localitati, timer.isOn]);
 
   return (
     <Box w="300px">
@@ -18,9 +29,9 @@ const Question = ({ localitati, handleChange, timerOn }) => {
         textColor="black"
         backgroundColor="tan"
         mb="auto"
-        onChange={handleChange(localitate)}
+        // onChange={handleChange(localitate)}
       >
-        {timerOn ? localitate : 'Olt'}
+        {timer.isOn ? question : 'Olt'}
       </Heading>
     </Box>
   );

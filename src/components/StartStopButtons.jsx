@@ -1,19 +1,18 @@
 import { Button } from '@chakra-ui/button';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { setTimerOn } from '../redux/timer/actions';
 
-const StartStopButtons = ({
-  timerOn,
-  setTimerOn,
-  resetGame,
-  gameIsLost,
-  gameIsWon,
-  level,
-}) => {
-  return timerOn ? (
+const StartStopButtons = ({ resetGame, gameIsLost, gameIsWon, level }) => {
+  const timer = useSelector(state => state.timer);
+  const dispatch = useDispatch();
+
+  return timer.isOn ? (
     <Button
       mx="auto"
       backgroundColor="red"
       onClick={() => {
-        setTimerOn(false);
+        dispatch(setTimerOn(false));
         resetGame();
       }}
     >
@@ -25,7 +24,7 @@ const StartStopButtons = ({
       backgroundColor="green"
       onClick={() => {
         if (level !== '0' && level !== '') {
-          setTimerOn(true);
+          dispatch(setTimerOn(true));
           resetGame();
         }
       }}
