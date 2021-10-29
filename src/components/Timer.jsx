@@ -3,8 +3,9 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { decreaseTime, resetTimer, setTime } from '../redux/timer/actions';
+import maxTime from '../redux/timer/constants';
 
-const Timer = ({ maxTime, loseGame }) => {
+const Timer = ({ loseGame }) => {
   const timer = useSelector(state => state.timer);
   const dispatch = useDispatch();
 

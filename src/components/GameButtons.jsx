@@ -1,25 +1,24 @@
 import { Button } from '@chakra-ui/button';
 import { Flex } from '@chakra-ui/layout';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { incrementLevel } from '../redux/level/actions';
 import { setTimerOn } from '../redux/timer/actions';
 import StartStopButtons from './StartStopButtons';
 
-const GameButtons = ({ resetGame, gameIsLost, gameIsWon, level, setLevel }) => {
+const GameButtons = ({ resetGame }) => {
+  const gameResults = useSelector(state => state.gameResults);
+  const level = useSelector(state => state.level);
   const dispatch = useDispatch();
 
   return (
     <Flex className="gameButtons" mt="10">
-      <StartStopButtons
-        resetGame={resetGame}
-        gameIsLost={gameIsLost}
-        gameIsWon={gameIsWon}
-        level={level}
-      />
-      {gameIsWon && level !== '14' ? (
+      <StartStopButtons resetGame={resetGame} level={level} />
+      {gameResults.isWon && level !== '14' ? (
         <Button
           backgroundColor="green"
           onClick={() => {
-            setLevel(prevLevel => (parseInt(prevLevel) + 1).toString());
+            dispatch(incrementLevel());
             dispatch(setTimerOn(true));
             resetGame();
           }}

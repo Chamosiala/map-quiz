@@ -1,6 +1,9 @@
 import { Text, Box } from '@chakra-ui/layout';
+import { useSelector } from 'react-redux';
 
-const CompletionPercentage = ({ remainingAnswers, correctAnswers }) => {
+const CompletionPercentage = () => {
+  const gameStats = useSelector(state => state.gameStats);
+
   return (
     <Box w="75px" backgroundColor="green">
       <Text
@@ -11,7 +14,8 @@ const CompletionPercentage = ({ remainingAnswers, correctAnswers }) => {
         lineHeight="85px"
       >
         {Math.floor(
-          (100 * correctAnswers) / (remainingAnswers + correctAnswers)
+          (100 * gameStats.correctAnswers) /
+            (gameStats.remainingAnswers + gameStats.correctAnswers)
         )}
         %
       </Text>

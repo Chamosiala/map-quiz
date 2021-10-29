@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { setTimerOn } from '../redux/timer/actions';
 
-const StartStopButtons = ({ resetGame, gameIsLost, gameIsWon, level }) => {
+const StartStopButtons = ({ resetGame, level }) => {
   const timer = useSelector(state => state.timer);
+  const gameResults = useSelector(state => state.gameResults);
   const dispatch = useDispatch();
 
   return timer.isOn ? (
@@ -29,7 +30,7 @@ const StartStopButtons = ({ resetGame, gameIsLost, gameIsWon, level }) => {
         }
       }}
     >
-      {gameIsLost || gameIsWon ? 'Play Again' : 'Play'}
+      {gameResults.isFinished ? 'Play Again' : 'Play'}
     </Button>
   );
 };

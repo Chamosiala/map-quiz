@@ -1,8 +1,11 @@
 import { Select } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
+import { setLevel } from '../redux/level/actions';
 
-const LevelSelect = ({ setLevel }) => {
+const LevelSelect = () => {
+  const dispatch = useDispatch();
   const change = event => {
-    setLevel(event.target.value);
+    dispatch(setLevel(event.target.value));
   };
 
   return (

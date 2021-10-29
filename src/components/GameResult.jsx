@@ -1,10 +1,13 @@
 import { Text } from '@chakra-ui/layout';
 import { useSelector } from 'react-redux';
 
-const GameResult = ({ result, level }) => {
-  const time = useSelector(state => state.timer.spentTime);
+const GameResult = () => {
+  // const time = useSelector(state => state.timer.spentTime);
+  const gameResults = useSelector(state => state.gameResults);
+  const time = gameResults.spentTime;
+  const level = gameResults.level;
 
-  if (result === 'won') {
+  if (gameResults.isWon) {
     return (
       <Text mt="100px" mx="100px" mb="5px">
         Ai terminat nivelul {level}! Timpul tau:{' '}
@@ -13,10 +16,10 @@ const GameResult = ({ result, level }) => {
         {('0' + ((time / 10) % 100)).slice(-2)}
       </Text>
     );
-  } else if (result === 'lost') {
+  } else {
     return (
       <Text mt="100px" mx="100px" mb="5px">
-        Ai pierdut!
+        Ai pierdut nivelul {level}!
       </Text>
     );
   }

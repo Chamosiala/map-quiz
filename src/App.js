@@ -20,10 +20,17 @@ import localitatiFillDictionary from './localitatiFillDictionary';
 import theme from './theme';
 import { setTimerOn } from './redux/timer/actions';
 import { setQuestion } from './redux/question/actions';
+import { setAnswer } from './redux/answer/actions';
+import {
+  incrementCorrectAnswers,
+  incrementWrongAnswers,
+  setCorrectAnswers,
+  setRemainingAnswers,
+  setWrongAnswers,
+} from './redux/gameStats/actions';
+import { resetGameResults, setGameResults } from './redux/gameResults/actions';
 
 function App() {
-  const maxTime = 480000;
-
   const [localitatiFill, setLocalitatiFill] = useState(
     localitatiFillDictionary
   );
@@ -31,22 +38,19 @@ function App() {
   const localitati = localitatiState.localitati;
   const timer = useSelector(state => state.timer);
   const question = useSelector(state => state.question);
-  const [answer, setAnswer] = useState('');
-  const [remainingAnswers, setRemainingAnswers] = useState(localitati.length);
-  const [correctAnswers, setCorrectAnswers] = useState(0);
-  const [wrongAnswers, setWrongAnswers] = useState(0);
-  const [gameIsLost, setGameIsLost] = useState(false);
-  const [gameIsWon, setGameIsWon] = useState(false);
-  const [level, setLevel] = useState('0');
+  const answer = useSelector(state => state.answer);
+  const gameStats = useSelector(state => state.gameStats);
+  // const [level, setLevel] = useState('0');
+  const level = useSelector(state => state.level);
+  const gameResults = useSelector(state => state.gameResults);
 
   const dispatch = useDispatch();
 
   const resetGame = () => {
     resetPaths();
     resetStats();
-    setGameIsLost(false);
-    setGameIsWon(false);
-    setAnswer('');
+    dispatch(resetGameResults());
+    dispatch(setAnswer(''));
   };
 
   const resetPaths = () => {
@@ -61,9 +65,9 @@ function App() {
   const resetStats = () => {
     dispatch(resetLocalitati());
     dispatch(setQuestion('Olt'));
-    setRemainingAnswers(LOCALITATI_OLT.length);
-    setCorrectAnswers(0);
-    setWrongAnswers(0);
+    dispatch(setRemainingAnswers(LOCALITATI_OLT.length));
+    dispatch(setCorrectAnswers(0));
+    dispatch(setWrongAnswers(0));
   };
 
   const resetRedPaths = object => {
@@ -87,38 +91,45 @@ function App() {
 
   const validateAnswer = localitate => {
     if (localitatiFill[localitate] === 'white' && timer.isOn) {
-      setAnswer(localitate);
+      dispatch(setAnswer(localitate));
     }
   };
 
   const winGame = () => {
     dispatch(setTimerOn(false));
-    setGameIsWon(true);
+    dispatch(
+      setGameResults({
+        spentTime: timer.spentTime,
+        level,
+        isWon: true,
+        isFinished: true,
+      })
+    );
   };
 
   const loseGame = () => {
     dispatch(setTimerOn(false));
-    setGameIsLost(true);
+    dispatch(
+      setGameResults({
+        spentTime: timer.spentTime,
+        level,
+        isWon: false,
+        isFinished: true,
+      })
+    );
   };
 
   useEffect(() => {
     let copyLocalitatiFill = localitatiFill;
     if (question === answer && answer !== '') {
       copyLocalitatiFill[answer] = 'green';
-      setCorrectAnswers(prevCorrectAnswers => {
-        return prevCorrectAnswers + 1;
-      });
-      setRemainingAnswers(prevRemainingAnswers => {
-        return prevRemainingAnswers - 1;
-      });
+      dispatch(incrementCorrectAnswers());
 
       dispatch(removeLocalitate(answer));
       resetRedPaths(copyLocalitatiFill);
     } else if (question !== answer && answer !== '') {
       copyLocalitatiFill[answer] = 'red';
-      setWrongAnswers(prevWrongAnswers => {
-        return prevWrongAnswers + 1;
-      });
+      dispatch(incrementWrongAnswers());
     }
 
     setLocalitatiFill(copyLocalitatiFill);
@@ -129,8 +140,7 @@ function App() {
     if (
       level === '0' ||
       level === '' ||
-      gameIsWon ||
-      gameIsLost ||
+      gameResults.isFinished ||
       timer.isOn === false
     ) {
       return;
@@ -148,14 +158,14 @@ function App() {
   }, [timer.isOn]);
 
   useEffect(() => {
-    setRemainingAnswers(localitati.length);
+    dispatch(setRemainingAnswers(localitati.length));
   }, [localitati]);
 
   useEffect(() => {
-    if (remainingAnswers === 0) {
+    if (gameStats.remainingAnswers === 0 && timer.isOn) {
       winGame();
     }
-  }, [remainingAnswers]);
+  }, [gameStats.remainingAnswers]);
 
   return (
     <ChakraProvider theme={theme}>
@@ -174,29 +184,15 @@ function App() {
         <Box className="gameInterface" alignContent="center">
           <Flex mb={5}>
             <Question />
-            <CompletionPercentage
-              correctAnswers={correctAnswers}
-              remainingAnswers={remainingAnswers}
-            />
+            <CompletionPercentage />
           </Flex>
-          <Timer maxTime={maxTime} loseGame={loseGame} />
+          <Timer loseGame={loseGame} />
           <Flex>
-            <Counter
-              remainingAnswers={remainingAnswers}
-              correctAnswers={correctAnswers}
-              wrongAnswers={wrongAnswers}
-            />
+            <Counter />
           </Flex>
-          {gameIsWon ? <GameResult result={'won'} level={level} /> : null}
-          {gameIsLost ? <GameResult result={'lost'} level={level} /> : null}
-          {timer.isOn ? null : <LevelSelect setLevel={setLevel} />}
-          <GameButtons
-            gameIsLost={gameIsLost}
-            gameIsWon={gameIsWon}
-            level={level}
-            resetGame={resetGame}
-            setLevel={setLevel}
-          />
+          {gameResults.isFinished ? <GameResult /> : null}
+          {timer.isOn ? null : <LevelSelect />}
+          <GameButtons resetGame={resetGame} />
         </Box>
       </Flex>
     </ChakraProvider>
