@@ -40,7 +40,6 @@ function App() {
   const question = useSelector(state => state.question);
   const answer = useSelector(state => state.answer);
   const gameStats = useSelector(state => state.gameStats);
-  // const [level, setLevel] = useState('0');
   const level = useSelector(state => state.level);
   const gameResults = useSelector(state => state.gameResults);
 
