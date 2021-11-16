@@ -6,6 +6,7 @@ import { setTimerOn } from '../redux/timer/actions';
 const StartStopButtons = ({ resetGame, level }) => {
   const timer = useSelector(state => state.timer);
   const gameResults = useSelector(state => state.gameResults);
+  const gameMode = useSelector(state => state.gameMode);
   const dispatch = useDispatch();
 
   return timer.isOn ? (
@@ -24,7 +25,7 @@ const StartStopButtons = ({ resetGame, level }) => {
       mx="auto"
       backgroundColor="green"
       onClick={() => {
-        if (level !== '0' && level !== '') {
+        if ((level !== '0' && level !== '') || gameMode === 'ordine') {
           dispatch(setTimerOn(true));
           resetGame();
         }

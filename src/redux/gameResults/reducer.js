@@ -3,6 +3,7 @@ const INITIAL_STATE = {
   level: 0,
   isWon: false,
   isFinished: false,
+  gameMode: '',
 };
 
 const gameResultsReducer = (state = INITIAL_STATE, action) => {

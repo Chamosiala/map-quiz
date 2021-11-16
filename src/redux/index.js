@@ -6,6 +6,7 @@ import answerReducer from './answer/reducer';
 import gameStatsReducer from './gameStats/reducer';
 import gameResultsReducer from './gameResults/reducer';
 import levelReducer from './level/reducer';
+import gameModeReducer from './gameMode/reducer';
 
 const allReducers = combineReducers({
   localitati: localitatiReducer,
@@ -15,6 +16,7 @@ const allReducers = combineReducers({
   gameStats: gameStatsReducer,
   gameResults: gameResultsReducer,
   level: levelReducer,
+  gameMode: gameModeReducer,
 });
 
 export default allReducers;

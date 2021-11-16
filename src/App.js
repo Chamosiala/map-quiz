@@ -29,6 +29,8 @@ import {
   setWrongAnswers,
 } from './redux/gameStats/actions';
 import { resetGameResults, setGameResults } from './redux/gameResults/actions';
+import ModeSelect from './components/ModeSelect';
+import { setLevel } from './redux/level/actions';
 
 function App() {
   const [localitatiFill, setLocalitatiFill] = useState(
@@ -42,6 +44,7 @@ function App() {
   const gameStats = useSelector(state => state.gameStats);
   const level = useSelector(state => state.level);
   const gameResults = useSelector(state => state.gameResults);
+  const gameMode = useSelector(state => state.gameMode);
 
   const dispatch = useDispatch();
 
@@ -102,6 +105,7 @@ function App() {
         level,
         isWon: true,
         isFinished: true,
+        gameMode,
       })
     );
   };
@@ -166,6 +170,12 @@ function App() {
     }
   }, [gameStats.remainingAnswers]);
 
+  useEffect(() => {
+    if (gameMode === 'ordine') {
+      dispatch(setLevel('14'));
+    }
+  }, [gameMode]);
+
   return (
     <ChakraProvider theme={theme}>
       <Flex ml="auto">
@@ -190,7 +200,8 @@ function App() {
             <Counter />
           </Flex>
           {gameResults.isFinished ? <GameResult /> : null}
-          {timer.isOn ? null : <LevelSelect />}
+          {!timer.isOn ? <ModeSelect /> : null}
+          {gameMode === 'nivele' && !timer.isOn ? <LevelSelect /> : null}
           <GameButtons resetGame={resetGame} />
         </Box>
       </Flex>

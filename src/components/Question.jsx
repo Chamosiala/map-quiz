@@ -8,15 +8,17 @@ const Question = () => {
   const localitatiState = useSelector(state => state.localitati);
   const localitati = localitatiState.localitati;
   const timer = useSelector(state => state.timer);
-  // const [localitate, setLocalitate] = useState(localitati[randomIndex]);
   const question = useSelector(state => state.question);
+  const gameMode = useSelector(state => state.gameMode);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (localitatiState.isFiltered) {
+    if (localitatiState.isFiltered && gameMode === 'nivele') {
       dispatch(
         setQuestion(localitati[Math.floor(Math.random() * localitati.length)])
       );
+    } else if (gameMode === 'ordine') {
+      dispatch(setQuestion(localitati[0]));
     }
   }, [localitati, timer.isOn]);
 
@@ -29,7 +31,6 @@ const Question = () => {
         textColor="black"
         backgroundColor="tan"
         mb="auto"
-        // onChange={handleChange(localitate)}
       >
         {timer.isOn ? question : 'Olt'}
       </Heading>
