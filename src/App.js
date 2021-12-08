@@ -133,6 +133,9 @@ function App() {
     } else if (question !== answer && answer !== '') {
       copyLocalitatiFill[answer] = 'red';
       dispatch(incrementWrongAnswers());
+      if (gameMode === 'ordine') {
+        loseGame();
+      }
     }
 
     setLocalitatiFill(copyLocalitatiFill);
@@ -190,7 +193,7 @@ function App() {
             localitatiFill={localitatiFill}
           />
         </Box>
-        <Box className="gameInterface" alignContent="center">
+        <Box className="gameInterface">
           <Flex mb={5}>
             <Question />
             <CompletionPercentage />
