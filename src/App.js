@@ -133,7 +133,7 @@ function App() {
     } else if (question !== answer && answer !== '') {
       copyLocalitatiFill[answer] = 'red';
       dispatch(incrementWrongAnswers());
-      if (gameMode === 'ordine') {
+      if (gameMode === 'ordine' || gameStats.wrongAnswers === 4) {
         loseGame();
       }
     }
@@ -199,9 +199,9 @@ function App() {
             <CompletionPercentage />
           </Flex>
           <Timer loseGame={loseGame} />
-          <Flex>
+          {/* <Flex>
             <Counter />
-          </Flex>
+          </Flex> */}
           {gameResults.isFinished ? <GameResult /> : null}
           {!timer.isOn ? <ModeSelect /> : null}
           {gameMode === 'nivele' && !timer.isOn ? <LevelSelect /> : null}

@@ -9,15 +9,15 @@ const CompletionPercentage = () => {
       <Text
         align="center"
         h="85px"
-        fontSize="large"
+        fontSize="4xl"
         margin="auto"
         lineHeight="85px"
       >
-        {Math.floor(
+        {/* {Math.floor(
           (100 * gameStats.correctAnswers) /
             (gameStats.remainingAnswers + gameStats.correctAnswers)
-        )}
-        %
+        )} */}
+        {gameStats.correctAnswers}
       </Text>
     </Box>
   );
