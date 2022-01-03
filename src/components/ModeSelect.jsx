@@ -12,6 +12,7 @@ const ModeSelect = () => {
     <Select mt="10" onChange={change} placeholder="Alege modul">
       <option value="nivele">Nivele</option>
       <option value="ordine">Ordine</option>
+      <option value="pro">Pro</option>
     </Select>
   );
 };

@@ -9,12 +9,13 @@ import StartStopButtons from './StartStopButtons';
 const GameButtons = ({ resetGame }) => {
   const gameResults = useSelector(state => state.gameResults);
   const level = useSelector(state => state.level);
+  const gameMode = useSelector(state => state.gameMode);
   const dispatch = useDispatch();
 
   return (
     <Flex className="gameButtons" mt="10">
       <StartStopButtons resetGame={resetGame} level={level} />
-      {gameResults.isWon && level !== '14' ? (
+      {gameResults.isWon && level !== '14' && gameMode === 'nivele' ? (
         <Button
           backgroundColor="green"
           onClick={() => {

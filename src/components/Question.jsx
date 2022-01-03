@@ -2,6 +2,7 @@ import { Heading, Box } from '@chakra-ui/layout';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import LOCALITATI_OLT from '../constants/LOCALITATI_OLT';
 import { setQuestion } from '../redux/question/actions';
 
 const Question = () => {
@@ -17,10 +18,21 @@ const Question = () => {
       dispatch(
         setQuestion(localitati[Math.floor(Math.random() * localitati.length)])
       );
-    } else if (gameMode === 'ordine') {
+    } else if (gameMode === 'ordine' || gameMode === 'pro') {
       dispatch(setQuestion(localitati[0]));
     }
   }, [localitati, timer.isOn]);
+
+  let body;
+  if (gameMode === 'nivele' || gameMode === 'ordine') {
+    body = <Box>{timer.isOn ? question : 'Olt'}</Box>;
+  } else if (gameMode === 'pro') {
+    body = (
+      <Box>{timer.isOn ? LOCALITATI_OLT.indexOf(question) + 1 : 'Olt'}</Box>
+    );
+  } else {
+    body = 'Olt';
+  }
 
   return (
     <Box w="300px">
@@ -32,7 +44,7 @@ const Question = () => {
         backgroundColor="tan"
         mb="auto"
       >
-        {timer.isOn ? question : 'Olt'}
+        {body}
       </Heading>
     </Box>
   );

@@ -8,7 +8,6 @@ import {
 } from './redux/localitati/actions';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import CompletionPercentage from './components/CompletionPercentage';
-import Counter from './components/Counter';
 import GameButtons from './components/GameButtons';
 import GameResult from './components/GameResult';
 import LevelSelect from './components/LevelSelect';
@@ -133,7 +132,11 @@ function App() {
     } else if (question !== answer && answer !== '') {
       copyLocalitatiFill[answer] = 'red';
       dispatch(incrementWrongAnswers());
-      if (gameMode === 'ordine' || gameStats.wrongAnswers === 4) {
+      if (
+        gameMode === 'ordine' ||
+        gameMode === 'pro' ||
+        gameStats.wrongAnswers === 4
+      ) {
         loseGame();
       }
     }
@@ -174,7 +177,7 @@ function App() {
   }, [gameStats.remainingAnswers]);
 
   useEffect(() => {
-    if (gameMode === 'ordine') {
+    if (gameMode === 'ordine' || gameMode === 'pro') {
       dispatch(setLevel('14'));
     }
   }, [gameMode]);
