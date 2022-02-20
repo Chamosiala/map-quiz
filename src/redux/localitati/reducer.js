@@ -15,10 +15,17 @@ const localitatiReducer = (
         ),
       };
     case 'SET_LOCALITATI_BY_LEVEL':
-      return {
-        localitati: LOCALITATI_OLT.slice(0, 8 * action.payload),
-        isFiltered: true,
-      };
+      if (action.payload === 0) {
+        return {
+          localitati: LOCALITATI_OLT.slice(0, 2),
+          isFiltered: true,
+        };
+      } else {
+        return {
+          localitati: LOCALITATI_OLT.slice(0, 8 * action.payload),
+          isFiltered: true,
+        };
+      }
     default:
       return state;
   }

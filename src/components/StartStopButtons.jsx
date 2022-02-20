@@ -25,7 +25,7 @@ const StartStopButtons = ({ resetGame, level }) => {
       mx="auto"
       backgroundColor="green"
       onClick={() => {
-        if ((level !== '0' && level !== '') || gameMode === 'ordine') {
+        if ((level !== 0 && level !== '') || gameMode !== 'nivele') {
           dispatch(setTimerOn(true));
           resetGame();
         }

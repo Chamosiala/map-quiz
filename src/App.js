@@ -147,7 +147,7 @@ function App() {
 
   useEffect(() => {
     if (
-      level === '0' ||
+      level === 0 ||
       level === '' ||
       gameResults.isFinished ||
       timer.isOn === false
@@ -158,10 +158,14 @@ function App() {
     dispatch(setLocalitatiByLevel(parseInt(level)));
 
     let copyLocalitatiFill = localitatiFill;
-    disablePaths(
-      LOCALITATI_OLT.slice(0, 8 * parseInt(level)),
-      copyLocalitatiFill
-    );
+    if (level === '0') {
+      disablePaths(LOCALITATI_OLT.slice(0, 2), copyLocalitatiFill);
+    } else {
+      disablePaths(
+        LOCALITATI_OLT.slice(0, 8 * parseInt(level)),
+        copyLocalitatiFill
+      );
+    }
 
     setLocalitatiFill(copyLocalitatiFill);
   }, [timer.isOn]);
